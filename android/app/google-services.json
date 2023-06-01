@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "265665880395",
+    "project_id": "order-place-app",
+    "storage_bucket": "order-place-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265665880395:android:d63ae0e373acdaf12948ce",
+        "android_client_info": {
+          "package_name": "com.order.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPAETIHOgFRO5xswGGxDPWaxXcERw2PC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

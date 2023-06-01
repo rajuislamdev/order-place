@@ -3,26 +3,28 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static final ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: const Color(0xFFF3F3F3),
+    brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       elevation: 0,
       centerTitle: false,
       titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
       iconTheme: IconThemeData(
-        color: Color(0xFF113F67),
+        color: Colors.purple,
       ),
     ),
-    colorScheme: const ColorScheme.light().copyWith(
-      secondary: const Color(0xFF113F67),
-      primary: const Color(0xFF0059AA),
-      background: const Color(0xFFF3F3F3),
-      primaryContainer: const Color(0xFFFFFFFF),
+    backgroundColor: Colors.white,
+    scaffoldBackgroundColor: Colors.white,
+    textTheme: GoogleFonts.poppinsTextTheme(),
+    buttonTheme: const ButtonThemeData(
+      textTheme: ButtonTextTheme.primary,
+      buttonColor: Colors.black,
     ),
-    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light().copyWith(
+      primary: Colors.purple,
+    ),
     highlightColor: Colors.white,
     hintColor: const Color(0xFF9E9E9E),
     disabledColor: const Color(0xFF343A40),
-    textTheme: GoogleFonts.poppinsTextTheme(),
   );
 }
