@@ -14,7 +14,7 @@ class LocalStorage {
   final token = prefs.getString('token');
   return token;
 }
-  Future<void> removeTokenAndUser() async {
+  Future<void> removeToken() async {
     final pref = await SharedPreferences.getInstance();
     await pref.remove('token');
     await pref.remove('currentUser');

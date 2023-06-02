@@ -61,6 +61,8 @@ class SignUpScreen extends ConsumerWidget {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Enter your password';
+                            } else if (value.length < 6) {
+                              return 'Password must be longer than 6 characters';
                             }
                             return null;
                           },
@@ -75,6 +77,7 @@ class SignUpScreen extends ConsumerWidget {
                                         .signUpWithEmailAndPassword(
                                       email: emailController.text,
                                       password: passwordController.text,
+                                      context: context,
                                     );
                                     if (isSuccess) {
                                       ScaffoldMessenger.of(context)
@@ -86,7 +89,7 @@ class SignUpScreen extends ConsumerWidget {
                                         ),
                                       );
                                       Navigator.pushNamed(
-                                          context, Routes.login);
+                                          context, Routes.dashboard);
                                     }
                                   }
                                 },

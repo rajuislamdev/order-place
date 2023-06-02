@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:place_order/routes.dart';
 import 'package:place_order/theme/theme.dart';
-import 'package:place_order/view/screens/auth/login.dart';
+import 'package:place_order/view/screens/splash/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: Routes.onGenerateRoute,
       onUnknownRoute: ((settings) {
         return MaterialPageRoute(
-          builder: (context) => LoginScreen(),
+          builder: (context) => const SplashScreen(),
         );
       }),
     );

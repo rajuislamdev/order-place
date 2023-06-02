@@ -74,6 +74,9 @@ class LoginScreen extends ConsumerWidget {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Enter your password';
+                            }else if(value.length<6){
+                              return 'Password must be longer than 6 characters';
+
                             }
                             return null;
                           },
@@ -98,7 +101,8 @@ class LoginScreen extends ConsumerWidget {
                                           content: Text('Login successfully'),
                                         ),
                                       );
-                                      // Navigator.pushNamed(context, Routes.login);
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          Routes.dashboard, (route) => false);
                                     }
                                   }
                                 },

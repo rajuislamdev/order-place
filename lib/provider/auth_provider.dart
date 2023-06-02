@@ -10,31 +10,13 @@ class AuthProvider extends ChangeNotifier {
   AuthProvider(this.ref);
   bool isLoading = false;
 
-  // Future<bool> createAccount({
-  //   required String email,
-  //   required String password,
-  // }) async {
-  //   isLoading = true;
-  //   notifyListeners();
-  //   DatabaseReference usersRef = FirebaseDatabase.instance.ref().child('users');
-  //   try {
-  //     await usersRef.push().set({
-  //       'email': email,
-  //       'password': password,
-  //     });
-  //     isLoading = false;
-  //     notifyListeners();
-  //     return true;
-  //   } catch (error) {
-  //     isLoading = false;
-  //     notifyListeners();
-  //     return false;
-  //   }
-  // }
-
   FirebaseAuth auth = FirebaseAuth.instance;
-  Future<bool> signUpWithEmailAndPassword(
-      {required String email, required String password}) async {
+
+  Future<bool> signUpWithEmailAndPassword({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
     try {
       isLoading = true;
       notifyListeners();
@@ -47,15 +29,26 @@ class AuthProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
       return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        const snackbar = SnackBar(
+          content: Text('The email address is already exist!'),
+          backgroundColor: Colors.red,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+      }
+      isLoading = false;
+      notifyListeners();
+      return false;
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
       }
-      // ...
       isLoading = false;
       notifyListeners();
       return false;
     }
+    return false;
   }
 
   Future<bool> loginWithEmailAndPassword({
