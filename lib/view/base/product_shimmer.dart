@@ -45,12 +45,12 @@ class ProductShimmerWidget extends StatelessWidget {
                         topRight: Radius.circular(5),
                       ),
                       child: FadeInImage.assetNetwork(
-                        placeholder: 'assets/place-holder.png',
+                        placeholder: 'assets/placeholder.png',
                         fit: BoxFit.cover,
                         height: MediaQuery.of(context).size.width / 2.45,
-                        image: 'assets/dress.jpg',
+                        image: 'assets/placeholder.png',
                         imageErrorBuilder: (c, o, s) => Image.asset(
-                          'assets/dress.jpg',
+                          'assets/placeholder.png',
                           fit: BoxFit.cover,
                           height: MediaQuery.of(context).size.width / 2.45,
                         ),

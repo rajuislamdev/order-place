@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:place_order/provider/product_provider.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final TextEditingController searchController;
 
   const CustomAppBar({Key? key, required this.searchController})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
       automaticallyImplyLeading: false,
       title: const Text(
@@ -24,8 +26,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {},
             icon: Stack(
               clipBehavior: Clip.none,
-              children: const [
-                Icon(
+              children: [
+                const Icon(
                   Icons.shopping_cart,
                   color: Colors.white,
                   size: 30,
@@ -36,7 +38,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   child: CircleAvatar(
                     radius: 10,
                     child: Text(
-                      '5',
+                      ref
+                          .read(productProvider)
+                          .cartProductList
+                          .length
+                          .toString(),
                     ),
                   ),
                 ),
@@ -44,22 +50,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         ),
-        // Container(
-        //   height: 50,
-        //   decoration: BoxDecoration(
-        //     color: const Color(0xFFe7edeb),
-        //     borderRadius: BorderRadius.circular(8.0),
-        //   ),
-        //   padding: const EdgeInsets.symmetric(horizontal: 10),
-        //   child: TextFormField(
-        //     controller: searchController,
-        //     decoration: const InputDecoration(
-        //       hintText: 'Search',
-        //       border: InputBorder.none,
-        //       suffixIcon: Icon(Icons.search),
-        //     ),
-        //   ),
-        // ),
       ],
       bottom: PreferredSize(
         preferredSize: preferredSize,
@@ -73,10 +63,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: TextFormField(
             controller: searchController,
-            decoration: const InputDecoration(
+            onChanged: (value) {
+              if (value.isEmpty) {
+                ref.read(productProvider).getProducts();
+              }
+            },
+            decoration: InputDecoration(
               hintText: 'Search',
               border: InputBorder.none,
-              suffixIcon: Icon(Icons.search),
+              suffixIcon: GestureDetector(
+                onTap: () {
+                  ref
+                      .read(productProvider)
+                      .serachProducts(searchKey: searchController.text);
+                },
+                child: const Icon(Icons.search),
+              ),
             ),
           ),
         ),

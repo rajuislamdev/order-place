@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:place_order/provider/auth_provider.dart';
+import 'package:place_order/provider/product_provider.dart';
 import 'package:place_order/routes.dart';
 import 'package:place_order/view/base/custom_button.dart';
 import 'package:place_order/view/base/custom_text_form_field.dart';
@@ -74,9 +75,8 @@ class LoginScreen extends ConsumerWidget {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Enter your password';
-                            }else if(value.length<6){
+                            } else if (value.length < 6) {
                               return 'Password must be longer than 6 characters';
-
                             }
                             return null;
                           },
@@ -103,6 +103,12 @@ class LoginScreen extends ConsumerWidget {
                                       );
                                       Navigator.pushNamedAndRemoveUntil(context,
                                           Routes.dashboard, (route) => false);
+                                      await ref
+                                          .read(productProvider)
+                                          .getProducts();
+                                      await ref
+                                          .read(productProvider)
+                                          .getCartProducts(userId: 1);
                                     }
                                   }
                                 },

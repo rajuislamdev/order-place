@@ -9,7 +9,7 @@ class AuthProvider extends ChangeNotifier {
 
   AuthProvider(this.ref);
   bool isLoading = false;
-
+  String? token = '';
   FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<bool> signUpWithEmailAndPassword({
@@ -94,6 +94,11 @@ class AuthProvider extends ChangeNotifier {
       notifyListeners();
       return false;
     }
+  }
+
+  Future<void> getToken() async {
+    token = await ref.read(localStorageProvider).getToken();
+    notifyListeners();
   }
 }
 

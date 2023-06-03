@@ -5,15 +5,11 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.purple,
       elevation: 0,
       centerTitle: false,
-      titleTextStyle: TextStyle(color: Colors.black, fontSize: 22),
-      iconTheme: IconThemeData(
-        color: Colors.purple,
-      ),
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 22),
     ),
-    backgroundColor: Colors.white,
     scaffoldBackgroundColor: Colors.white,
     textTheme: GoogleFonts.poppinsTextTheme(),
     buttonTheme: const ButtonThemeData(

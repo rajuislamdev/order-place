@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:place_order/model/product.dart';
+import 'package:place_order/routes.dart';
 
 class ProductWidget extends ConsumerWidget {
   final Products product;
@@ -11,7 +12,13 @@ class ProductWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          Routes.productDetails,
+          arguments: product,
+        );
+      },
       child: Container(
         height: MediaQuery.of(context).size.width / 1.2,
         margin: const EdgeInsets.all(5),
@@ -41,15 +48,16 @@ class ProductWidget extends ConsumerWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5)),
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                    ),
                     child: FadeInImage.assetNetwork(
-                      placeholder: 'assets/place-holder.png',
+                      placeholder: 'assets/placeholder.png',
                       fit: BoxFit.cover,
                       height: MediaQuery.of(context).size.width / 2.45,
                       image: product.images!.first,
                       imageErrorBuilder: (c, o, s) => Image.asset(
-                          'assets/dress.jpg',
+                          'assets/placeholder.png',
                           fit: BoxFit.cover,
                           height: MediaQuery.of(context).size.width / 2.45),
                     ),

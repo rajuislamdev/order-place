@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:place_order/provider/product_provider.dart';
 import 'package:place_order/routes.dart';
 import 'package:place_order/services/local_storage.dart';
 
@@ -14,7 +17,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    loadData();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      loadData();
+    });
   }
 
   @override
@@ -50,6 +56,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   Future<void> loadData() async {
     String? token = await ref.read(localStorageProvider).getToken();
     if (token != null) {
+      await ref.read(productProvider).getProducts();
+      await ref.read(productProvider).getCartProducts(userId: 1);
       Navigator.pushNamed(context, Routes.dashboard);
     } else {
       Navigator.pushNamed(context, Routes.login);

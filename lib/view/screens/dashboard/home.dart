@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:place_order/provider/cart_provider.dart';
+import 'package:place_order/provider/product_provider.dart';
 import 'package:place_order/view/base/custom_appbar.dart';
 import 'package:place_order/view/base/product_shimmer.dart';
 import 'package:place_order/view/base/product_widget.dart';
@@ -13,13 +13,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      ref.read(productProvider).getProducts();
-    });
-    super.initState();
-  }
+ 
 
   final TextEditingController searchController = TextEditingController();
 

@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:place_order/provider/auth_provider.dart';
+import 'package:place_order/provider/product_provider.dart';
 import 'package:place_order/routes.dart';
 import 'package:place_order/view/base/custom_button.dart';
 import 'package:place_order/view/base/custom_text_form_field.dart';
@@ -90,6 +93,12 @@ class SignUpScreen extends ConsumerWidget {
                                       );
                                       Navigator.pushNamed(
                                           context, Routes.dashboard);
+                                      await ref
+                                          .read(productProvider)
+                                          .getProducts();
+                                      await ref
+                                          .read(productProvider)
+                                          .getCartProducts(userId: 1);
                                     }
                                   }
                                 },

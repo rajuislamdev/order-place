@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:place_order/view/screens/dashboard/cart.dart';
 import 'package:place_order/view/screens/dashboard/profile.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -15,8 +16,8 @@ class DashboardScreenState extends State<DashboardScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-     HomeScreen(),
-    const Screen2(),
+    const HomeScreen(),
+    const CartScreen(),
     const Screen3(),
     const ProfileScreen()
   ];

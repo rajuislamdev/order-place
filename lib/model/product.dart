@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Products {
   int? id;
   String? title;
@@ -31,7 +29,7 @@ class Products {
     title = json['title'];
     description = json['description'];
     price = json['price'];
-    discountPercentage = json['discountPercentage'];
+    discountPercentage = json['discountPercentage'].toDouble() as double;
     rating = json['rating'].toDouble() as double;
     stock = json['stock'];
     brand = json['brand'];
