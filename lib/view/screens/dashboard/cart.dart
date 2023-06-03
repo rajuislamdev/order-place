@@ -32,6 +32,13 @@ class CartScreen extends ConsumerWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: ListTile(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          Routes.checkout,
+                          arguments: cartProducts[index],
+                        );
+                      },
                       tileColor: Theme.of(context).hintColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),

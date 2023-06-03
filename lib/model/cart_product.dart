@@ -1,20 +1,20 @@
 class CartProduct {
   late int id;
-  String? title;
-  int? price;
-  int? quantity;
-  int? total;
-  double? discountPercentage;
-  int? discountedPrice;
+  late String title;
+  late int price;
+  late int quantity;
+  late int total;
+  late double discountPercentage;
+  late int discountedPrice;
 
   CartProduct(
       {required this.id,
-      this.title,
-      this.price,
-      this.quantity,
-      this.total,
-      this.discountPercentage,
-      this.discountedPrice});
+      required this.title,
+      required this.price,
+      required this.quantity,
+      required this.total,
+      required this.discountPercentage,
+      required this.discountedPrice});
 
   CartProduct.fromMap(Map<String, dynamic> json) {
     id = json['id'];
