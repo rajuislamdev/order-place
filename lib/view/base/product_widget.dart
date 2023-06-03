@@ -81,7 +81,7 @@ class ProductWidget extends ConsumerWidget {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          '${product.price} Tk',
+                          '${product.price} \$',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),

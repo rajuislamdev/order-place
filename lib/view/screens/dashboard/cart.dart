@@ -39,7 +39,7 @@ class CartScreen extends ConsumerWidget {
                           arguments: cartProducts[index],
                         );
                       },
-                      tileColor: Theme.of(context).hintColor,
+                      tileColor: Colors.grey.shade300,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
@@ -49,7 +49,7 @@ class CartScreen extends ConsumerWidget {
                         cartProducts[index].title.toString(),
                       ),
                       subtitle:
-                          Text('Total Amount: ${cartProducts[index].price} TK'),
+                          Text('Total Amount: ${cartProducts[index].price} \$'),
                       trailing: IconButton(
                         onPressed: () {
                           ref

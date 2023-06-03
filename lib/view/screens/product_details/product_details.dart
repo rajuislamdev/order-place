@@ -111,7 +111,7 @@ class ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ),
                       Text(
-                        '${widget.products.price.toString()} TK',
+                        '${widget.products.price.toString()} \$',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

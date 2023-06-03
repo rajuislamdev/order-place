@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:place_order/model/order.dart';
@@ -88,7 +90,7 @@ class CustomBottomSheet extends ConsumerWidget {
                             ),
                           ),
                           const TextSpan(
-                            text: ' Tk',
+                            text: ' \$',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -186,11 +188,9 @@ class CustomBottomSheet extends ConsumerWidget {
                                 context: context,
                               );
                       if (isSuccess) {
+                        Navigator.pushNamed(context, Routes.dashboard);
                         ref.read(productProvider).quantity = 0;
                         ref.read(productProvider).totalProudctPrice = 0;
-                        // ignore: use_build_context_synchronously
-                        Navigator.pop(context);
-                        // ignore: use_build_context_synchronously
                         showDialog(
                           context: context,
                           barrierDismissible: false,
@@ -199,10 +199,10 @@ class CustomBottomSheet extends ConsumerWidget {
                             buttonText: 'Okay',
                             imagePath: 'assets/done.png',
                             onTap: () async {
-                              ref
+                              await ref
                                   .read(productProvider)
                                   .getCartProducts(userId: 1);
-                              Navigator.pushNamed(context, Routes.dashboard);
+                              Navigator.pop(context);
                             },
                           ),
                         );

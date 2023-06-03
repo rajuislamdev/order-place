@@ -13,9 +13,15 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
- 
-
   final TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(productProvider).getCartProducts(userId: 1);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

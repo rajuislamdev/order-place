@@ -91,8 +91,8 @@ class SignUpScreen extends ConsumerWidget {
                                               'Account created successfully'),
                                         ),
                                       );
-                                      Navigator.pushNamed(
-                                          context, Routes.dashboard);
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          Routes.dashboard, (route) => false);
                                       await ref
                                           .read(productProvider)
                                           .getProducts();

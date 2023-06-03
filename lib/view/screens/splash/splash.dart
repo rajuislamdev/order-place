@@ -58,9 +58,11 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     if (token != null) {
       await ref.read(productProvider).getProducts();
       await ref.read(productProvider).getCartProducts(userId: 1);
-      Navigator.pushNamed(context, Routes.dashboard);
+      Navigator.pushNamedAndRemoveUntil(
+          context, Routes.dashboard, (route) => false);
     } else {
-      Navigator.pushNamed(context, Routes.login);
+      Navigator.pushNamedAndRemoveUntil(
+          context, Routes.login, (route) => false);
     }
   }
 }

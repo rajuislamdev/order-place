@@ -93,7 +93,7 @@ class CheckoutScreen extends ConsumerWidget {
                                     ),
                                   ),
                                   const TextSpan(
-                                    text: ' Tk',
+                                    text: ' \$',
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -122,7 +122,7 @@ class CheckoutScreen extends ConsumerWidget {
                     rowTile(
                         title: 'Product Price:',
                         value: cartProduct.price.toDouble(),
-                        tralingText: 'TK'),
+                        tralingText: '\$'),
                     const SizedBox(height: 10),
                     rowTileQuantity(
                         title: 'Quantity:', value: cartProduct.quantity),
@@ -135,19 +135,21 @@ class CheckoutScreen extends ConsumerWidget {
                     rowTile(
                         title: 'Total Price:',
                         value: cartProduct.discountedPrice.toDouble(),
-                        tralingText: 'Tk'),
+                        tralingText: '\$'),
                     const Spacer(),
-                    CustomButton(
-                      width: double.infinity,
-                      onPressed: () {
-                        payment(
-                            ref: ref,
-                            amount: cartProduct.discountedPrice,
-                            currency: 'USD',
-                            context: context);
-                      },
-                      buttonText: 'Checkout',
-                    )
+                    ref.watch(paymentProvider).isLoading
+                        ? const CircularProgressIndicator()
+                        : CustomButton(
+                            width: double.infinity,
+                            onPressed: () {
+                              payment(
+                                  ref: ref,
+                                  amount: cartProduct.discountedPrice,
+                                  currency: 'USD',
+                                  context: context);
+                            },
+                            buttonText: 'Checkout',
+                          )
                   ],
                 ),
               ),
@@ -182,7 +184,6 @@ class CheckoutScreen extends ConsumerWidget {
           googlePay: googlePay,
         ),
       );
-
       // display pament sheet
       displayPaymentSheet(context);
     } catch (error) {
