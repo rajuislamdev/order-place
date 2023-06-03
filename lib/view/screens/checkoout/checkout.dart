@@ -1,13 +1,20 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:place_order/model/cart_product.dart';
+import 'package:place_order/provider/payment.dart';
+import 'package:place_order/routes.dart';
+import 'package:place_order/view/base/Custom_dialog.dart';
 import 'package:place_order/view/base/custom_button.dart';
 
-class CheckoutScreen extends StatelessWidget {
+class CheckoutScreen extends ConsumerWidget {
   final CartProduct cartProduct;
   const CheckoutScreen({super.key, required this.cartProduct});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Checkout'),
@@ -132,8 +139,14 @@ class CheckoutScreen extends StatelessWidget {
                     const Spacer(),
                     CustomButton(
                       width: double.infinity,
-                      onPressed: () {},
-                      buttonText: 'Payment',
+                      onPressed: () {
+                        payment(
+                            ref: ref,
+                            amount: cartProduct.discountedPrice,
+                            currency: 'USD',
+                            context: context);
+                      },
+                      buttonText: 'Checkout',
                     )
                   ],
                 ),
@@ -143,6 +156,59 @@ class CheckoutScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> payment({
+    required WidgetRef ref,
+    required int amount,
+    required String currency,
+    required BuildContext context,
+  }) async {
+    try {
+      final String? clientSecretKey = await ref
+          .read(paymentProvider)
+          .createPaymentIntent(amount: amount, currency: currency);
+      print(clientSecretKey);
+
+      final googlePay = PaymentSheetGooglePay(
+          merchantCountryCode: "USA", currencyCode: currency, testEnv: true);
+
+      // Initialize Payment Sheet
+      await Stripe.instance.initPaymentSheet(
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          paymentIntentClientSecret: clientSecretKey,
+          style: ThemeMode.light,
+          merchantDisplayName: 'Place',
+          googlePay: googlePay,
+        ),
+      );
+
+      // display pament sheet
+      displayPaymentSheet(context);
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  displayPaymentSheet(BuildContext context) async {
+    try {
+      await Stripe.instance.presentPaymentSheet().then((value) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => CustomDialog(
+            title: 'Payment successfull',
+            buttonText: 'Okay',
+            imagePath: 'assets/done.png',
+            onTap: () {
+              Navigator.pushNamed(context, Routes.dashboard);
+            },
+          ),
+        );
+      });
+    } catch (e) {
+      print('$e');
+    }
   }
 
   Widget rowTile(

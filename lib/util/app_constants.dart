@@ -5,4 +5,5 @@ class AppConstant {
   static const String cartProudctsUrl = '$baseUrl/carts/user';
   static const String deleteCartsUrl = '$baseUrl/carts';
   static const String searchProductsUrl = '$baseUrl/products/search';
+  static const String paymentUrl = 'https://api.stripe.com/v1/payment_intents';
 }

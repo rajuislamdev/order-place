@@ -27,7 +27,7 @@ class ApiClient {
       url,
       data: data,
       options: Options(
-        headers:  defaultHeaders,
+        headers: headers ?? defaultHeaders,
         followRedirects: false,
         validateStatus: ((status) {
           return status! < 500;
@@ -45,7 +45,7 @@ class ApiClient {
       url,
       data: data,
       options: Options(
-        headers:  defaultHeaders,
+        headers: defaultHeaders,
         followRedirects: false,
         validateStatus: ((status) {
           return status! < 500;
@@ -63,7 +63,7 @@ class ApiClient {
       url,
       data: data,
       options: Options(
-        headers:  defaultHeaders,
+        headers: defaultHeaders,
         followRedirects: false,
         validateStatus: ((status) {
           return status! < 500;
@@ -71,7 +71,6 @@ class ApiClient {
       ),
     );
   }
-
 }
 
 final apiClientProvider = Provider((ref) => ApiClient());
