@@ -1,16 +1,24 @@
 # place_order
 
-A new Flutter project.
 
-## Getting Started
+Project Setup Steps:
 
-This project is a starting point for a Flutter application.
+1. Clone the project from GitHub.
+2. Open the project with a suitable code editor.
+3. Execute the following command to clean the project and retrieve the required dependencies:
 
-A few resources to get you started if this is your first Flutter project:
+   flutter clean && flutter pub get
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Usage of API:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+All necessary API information is gathered from the official documentation of dummyjson.com. Please refer to this website for detailed instructions and guidelines.
+
+Payment Functionality Test Information:
+
+To test the payment functionality, kindly use the following details:
+
+1. Card Number: 4242 4242 4242 4242
+2. Expiration Date: Any future date
+3. CVC: Any three-digit number
+4. ZIP: Any five-digit ZIP code
+Please ensure that the provided information is accurate and properly formatted for successful testing.
