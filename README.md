@@ -1,6 +1,9 @@
 # place_order
 
 
+
+Project made from scratch
+
 Project Setup Steps:
 
 1. Clone the project from GitHub.
